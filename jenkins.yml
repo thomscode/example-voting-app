@@ -1,0 +1,11 @@
+version: '3'
+services:
+  jenkins:
+    image: rwlaub/jenkins
+    environment:
+      - GITHUB_ID=<your-github-id>
+      - DOCKERHUB_ID=<your-dockerhub-id>
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
