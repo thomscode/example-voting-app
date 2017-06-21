@@ -1,6 +1,6 @@
 node {
+    git "https://github.com/$GITHUB_ID/example-voting-app.git"
     stage('Build') {
-        git "https://github.com/$GITHUB_ID/example-voting-app.git"
         parallel (
             result: { sh "docker image build -t $DOCKERHUB_ID/voting-result result" },
             worker: { sh "docker image build -t $DOCKERHUB_ID/voting-worker worker" },
@@ -9,8 +9,9 @@ node {
     }
     stage('Test') {
         parallel (
-            phase1: { sh "echo p1; sleep 20s; echo phase1" },
-            phase2: { sh "echo p2; sleep 40s; echo phase2" }
+            result: { sh "echo result-test" },
+            worker: {sh "echo worker-test"},
+            vote: {sh "echo vote-test"}
         )
     }
     stage('Push') {
