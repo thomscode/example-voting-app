@@ -23,4 +23,7 @@ node {
             vote: { sh "docker image push $DOCKERHUB_ID/voting-vote" }
         )
     }
+    stage('Deploy') {
+        sh 'docker-compose up -d'
+    }
 }
