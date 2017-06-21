@@ -18,9 +18,9 @@ node {
             sh 'docker login -u $USERNAME -p $PASSWORD'
         }
         parallel (
-            result: { sh "docker image push $DOCKERHUB_ID/voting-result result" },
-            worker: { sh "docker image push $DOCKERHUB_ID/voting-worker worker" },
-            vote: { sh "docker image push $DOCKERHUB_ID/voting-vote vote" }
+            result: { sh "docker image push $DOCKERHUB_ID/voting-result" },
+            worker: { sh "docker image push $DOCKERHUB_ID/voting-worker" },
+            vote: { sh "docker image push $DOCKERHUB_ID/voting-vote" }
         )
     }
 }
