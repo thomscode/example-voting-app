@@ -14,9 +14,13 @@ node {
         )
     }
     stage('Push') {
+        withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+            sh 'docker login -u $USERNAME -p $PASSWORD'
+        }
         parallel (
-            phase1: { sh "echo p1; sleep 20s; echo phase1" },
-            phase2: { sh "echo p2; sleep 40s; echo phase2" }
+            result: { sh "docker image push $DOCKERHUB_ID/voting-result result" },
+            worker: { sh "docker image push $DOCKERHUB_ID/voting-worker worker" },
+            vote: { sh "docker image push $DOCKERHUB_ID/voting-vote vote" }
         )
     }
 }
