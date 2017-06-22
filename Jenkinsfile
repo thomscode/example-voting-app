@@ -11,7 +11,7 @@ node {
         parallel (
             result: { sh "echo result-test" },
             worker: {sh "echo worker-test"},
-            vote: {sh "echo vote-test"}
+            vote: {sh "docker container run $DOCKERHUB_ID/voting-vote python tests.py"}
         )
     }
     stage('Push') {
