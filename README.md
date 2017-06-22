@@ -1,1 +1,1 @@
-/dev/null
+# example-voting-app
