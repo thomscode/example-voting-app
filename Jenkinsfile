@@ -25,7 +25,7 @@ node {
         )
     }
     stage('Deploy') {
-	sh 'sed -i "s/@@DHID@@/$DOCKER_HUBID/" docker-copmose.yml'
+	sh 'sed -i "s/@@DHID@@/${DOCKER_HUBID}/" docker-compose.yml'
         sh 'docker-compose up -d'
     }
 }
